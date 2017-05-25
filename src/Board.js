@@ -143,14 +143,51 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var rows = this.rows();
+      var startRow = 0;
+      var startCol = 0;
+      var diagonalVal = [];
+
+      if (majorDiagonalColumnIndexAtFirstRow < 0) {
+        while (majorDiagonalColumnIndexAtFirstRow < 0) {
+          startRow++;
+          majorDiagonalColumnIndexAtFirstRow++;
+        }
+        for (var i = startRow; i < rows.length; i++) {
+          diagonalVal.push(rows[i][startCol]);
+          startCol++;
+        }
+      } else {
+        for (var j = majorDiagonalColumnIndexAtFirstRow; j < rows.length; j++) {
+          diagonalVal.push(rows[startRow][j]);
+          startRow++;
+        }
+      }
+
+      var diagonalSum = diagonalVal.reduce(function(acc, val) {
+        return acc + val;
+      }, 0);
+
+      if (diagonalSum > 1) {
+        return true;
+      } else {
+        return false;
+      }
+      return true;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var n = this.rows().length;
+      var start = -(n - 1);
+      for (var i = start; i < n; i++) {
+        debugger;
+        if (this.hasMajorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     },
-
 
 
     // Minor Diagonals - go from top-right to bottom-left
