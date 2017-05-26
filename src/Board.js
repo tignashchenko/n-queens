@@ -169,7 +169,7 @@
       var size = this.get('n');
       var count = 0;
 
-      for (var rowIndex = 0, colIndex = 0; rowIndex < size && colIndex < size; rowIndex++, colIndex++) {
+      for (var rowIndex = 0, colIndex = minorDiagonalColumnIndexAtFirstRow; rowIndex < size && colIndex >= 0; rowIndex++, colIndex--) {
         if (colIndex < size) {
           var row = this.get(rowIndex);
           count += row[colIndex];
